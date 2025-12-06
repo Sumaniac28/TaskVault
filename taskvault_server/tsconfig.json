@@ -8,17 +8,13 @@
     "emitDecoratorMetadata": true,
     "moduleResolution": "node",
     "outDir": "./build",
+    "rootDir": "src",
     "esModuleInterop": true,
     "strict": true,
     "strictPropertyInitialization": false,
     "skipLibCheck": true,
     "sourceMap": true,
     "baseUrl": ".",
-    "rootDir": ".",
-    "plugins": [
-      { "transform": "typescript-transform-paths" },
-      { "transform": "typescript-transform-paths", "afterDeclarations": true }
-    ],
     "paths": {
       "@/*": ["src/*"]
     }
