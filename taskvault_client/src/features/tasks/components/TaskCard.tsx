@@ -8,6 +8,7 @@ import { tasksApi } from "@/features/tasks/tasksApi";
 import { Task, TaskStatus, TaskPriority } from "@/types";
 import { Button, Textarea, ConfirmDialog } from "@/shared/components";
 import { formatDate, truncate } from "@/shared/utils/helpers";
+import { getErrorMessage } from "@/lib/errorHandler";
 import {
   statusOptions,
   priorityOptions,
@@ -34,7 +35,7 @@ export default function TaskCard({ task }: TaskCardProps) {
       dispatch(deleteTaskAction(task.id));
       setShowDeleteDialog(false);
     } catch (err) {
-      alert("Failed to delete task");
+      alert(getErrorMessage(err));
     } finally {
       setLoading(false);
     }
@@ -46,7 +47,7 @@ export default function TaskCard({ task }: TaskCardProps) {
       const updated = await tasksApi.updateTask(task.id, { status });
       dispatch(updateTaskAction(updated));
     } catch (err) {
-      alert("Failed to update task");
+      alert(getErrorMessage(err));
     } finally {
       setLoading(false);
     }
@@ -58,7 +59,7 @@ export default function TaskCard({ task }: TaskCardProps) {
       const updated = await tasksApi.updateTask(task.id, { priority });
       dispatch(updateTaskAction(updated));
     } catch (err) {
-      alert("Failed to update task");
+      alert(getErrorMessage(err));
     } finally {
       setLoading(false);
     }
@@ -73,7 +74,7 @@ export default function TaskCard({ task }: TaskCardProps) {
       dispatch(updateTaskAction(updated));
       setEditDescription(false);
     } catch (err) {
-      alert("Failed to update task");
+      alert(getErrorMessage(err));
     } finally {
       setLoading(false);
     }

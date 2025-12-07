@@ -5,6 +5,7 @@ import { addTask } from "@/features/tasks/tasksSlice";
 import { tasksApi } from "@/features/tasks/tasksApi";
 import { CreateTaskPayload } from "@/types";
 import { Alert, Input, Textarea, Select, Button } from "@/shared/components";
+import { getErrorMessage } from "@/lib/errorHandler";
 import { statusOptions, priorityOptions } from "@/shared/constants/options";
 
 interface CreateTaskModalProps {
@@ -37,7 +38,7 @@ export default function CreateTaskModal({
       onSuccess();
       onClose();
     } catch (err: any) {
-      setError(err.response?.data?.error || "Failed to create task");
+      setError(getErrorMessage(err));
     } finally {
       setLoading(false);
     }
