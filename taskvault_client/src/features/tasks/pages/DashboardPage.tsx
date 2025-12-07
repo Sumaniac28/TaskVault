@@ -44,38 +44,38 @@ export default function DashboardPage() {
   });
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <header className="bg-surface shadow-sm border-b border-border-default">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4">
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 bg-primary rounded-sm" />
-            <h1 className="text-2xl font-themeFont font-bold text-primary">
+            <h1 className="text-xl sm:text-2xl font-themeFont font-bold text-primary">
               TaskVault
             </h1>
           </div>
-          <div className="flex items-center gap-4">
-            <span className="text-sm text-muted font-bodyFont">
+          <div className="flex items-center gap-2 sm:gap-4 w-full sm:w-auto">
+            <span className="text-xs sm:text-sm text-muted font-bodyFont truncate">
               {user?.email}
             </span>
-            <Button variant="secondary" size="md" onClick={handleLogout}>
+            <Button variant="secondary" size="md" onClick={handleLogout} className="text-xs sm:text-sm px-2 sm:px-4">
               Logout
             </Button>
           </div>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-8">
-          <div className="flex justify-between items-center mb-6">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 w-full flex-1">
+        <div className="mb-6 sm:mb-8">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
             <div>
-              <h2 className="text-3xl font-themeFont font-bold text-primary mb-2">
+              <h2 className="text-2xl sm:text-3xl font-themeFont font-bold text-primary mb-1 sm:mb-2">
                 My Tasks
               </h2>
-              <p className="text-muted text-sm font-bodyFont">
+              <p className="text-xs sm:text-sm text-muted font-bodyFont">
                 Manage and track your work
               </p>
             </div>
-            <Button variant="primary" onClick={() => setShowCreateModal(true)}>
+            <Button variant="primary" onClick={() => setShowCreateModal(true)} className="text-sm w-full sm:w-auto">
               Create Task
             </Button>
           </div>

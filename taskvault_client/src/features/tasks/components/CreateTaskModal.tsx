@@ -44,15 +44,15 @@ export default function CreateTaskModal({
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-surface rounded-2xl shadow-xl border border-border-default w-full max-w-md">
-        <div className="px-6 pt-6 pb-4 border-b border-border-default">
-          <h2 className="text-xl font-themeFont font-bold text-primary">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-3 sm:p-4">
+      <div className="bg-surface rounded-2xl shadow-xl border border-border-default w-full max-w-md max-h-[90vh] overflow-y-auto">
+        <div className="px-4 sm:px-6 pt-4 sm:pt-6 pb-3 sm:pb-4 border-b border-border-default sticky top-0 bg-surface">
+          <h2 className="text-lg sm:text-xl font-themeFont font-bold text-primary">
             Create Task
           </h2>
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-5">
+        <form onSubmit={handleSubmit(onSubmit)} className="p-4 sm:p-6 space-y-4 sm:space-y-5">
           {error && (
             <Alert type="error" message={error} onClose={() => setError("")} />
           )}
@@ -71,7 +71,7 @@ export default function CreateTaskModal({
             rows={3}
           />
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <Select
               label="Status"
               options={statusOptions}
@@ -86,15 +86,15 @@ export default function CreateTaskModal({
 
           <Input label="Due Date" type="date" {...register("dueDate")} />
 
-          <div className="flex gap-3 pt-4">
-            <Button variant="ghost" onClick={onClose} className="flex-1">
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 pt-2 sm:pt-4">
+            <Button variant="ghost" onClick={onClose} className="flex-1 text-sm sm:text-base">
               Cancel
             </Button>
             <Button
               variant="primary"
               type="submit"
               disabled={loading}
-              className="flex-1"
+              className="flex-1 text-sm sm:text-base"
             >
               {loading ? "Creating..." : "Create"}
             </Button>

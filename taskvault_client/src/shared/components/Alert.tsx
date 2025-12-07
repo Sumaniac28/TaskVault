@@ -17,16 +17,16 @@ export default function Alert({ type, message, onClose, icon }: AlertProps) {
 
   return (
     <div
-      className={`border rounded-lg px-4 py-3 font-bodyFont flex items-center justify-between gap-3 ${styles[type]}`}
+      className={`border rounded-lg px-3 sm:px-4 py-2 sm:py-3 font-bodyFont flex items-center justify-between gap-2 sm:gap-3 ${styles[type]}`}
     >
-      <div className="flex items-center gap-2">
-        {icon && <span>{icon}</span>}
-        <p className="text-sm">{message}</p>
+      <div className="flex items-center gap-1 sm:gap-2 min-w-0">
+        {icon && <span className="flex-shrink-0">{icon}</span>}
+        <p className="text-xs sm:text-sm break-words">{message}</p>
       </div>
       {onClose && (
         <button
           onClick={onClose}
-          className="text-lg font-bold opacity-70 hover:opacity-100"
+          className="text-base sm:text-lg font-bold opacity-70 hover:opacity-100 flex-shrink-0"
         >
           ×
         </button>

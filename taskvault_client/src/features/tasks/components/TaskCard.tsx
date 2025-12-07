@@ -81,9 +81,9 @@ export default function TaskCard({ task }: TaskCardProps) {
 
   return (
     <>
-      <div className="bg-surface p-5 rounded-xl shadow border border-border-default hover:shadow-md transition-shadow">
-        <div className="flex justify-between items-start mb-3">
-          <h3 className="font-themeFont font-semibold text-lg text-primary flex-1 break-words">
+      <div className="bg-surface p-3 sm:p-5 rounded-xl shadow border border-border-default hover:shadow-md transition-shadow">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-start gap-2 mb-3">
+          <h3 className="font-themeFont font-semibold text-base sm:text-lg text-primary flex-1 break-words">
             {truncate(task.title, 50)}
           </h3>
           <Button
@@ -91,7 +91,7 @@ export default function TaskCard({ task }: TaskCardProps) {
             size="sm"
             onClick={() => setShowDeleteDialog(true)}
             disabled={loading}
-            className="ml-2 whitespace-nowrap"
+            className="text-xs sm:text-sm px-2 sm:px-4 whitespace-nowrap w-full sm:w-auto"
           >
             Delete
           </Button>
@@ -104,7 +104,7 @@ export default function TaskCard({ task }: TaskCardProps) {
               onChange={(e) => setNewDescription(e.target.value)}
               placeholder="Enter task description"
               rows={2}
-              className="text-sm"
+              className="text-xs sm:text-sm"
             />
             <div className="flex gap-2">
               <Button
@@ -112,7 +112,7 @@ export default function TaskCard({ task }: TaskCardProps) {
                 variant="primary"
                 onClick={handleSaveDescription}
                 disabled={loading}
-                className="flex-1"
+                className="flex-1 text-xs sm:text-sm"
               >
                 Save
               </Button>
@@ -123,7 +123,7 @@ export default function TaskCard({ task }: TaskCardProps) {
                   setEditDescription(false);
                   setNewDescription(task.description || "");
                 }}
-                className="flex-1"
+                className="flex-1 text-xs sm:text-sm"
               >
                 Cancel
               </Button>
@@ -134,7 +134,7 @@ export default function TaskCard({ task }: TaskCardProps) {
             {task.description ? (
               <p
                 onClick={() => setEditDescription(true)}
-                className="text-sm text-muted mb-3 font-bodyFont cursor-pointer hover:text-primary transition-colors"
+                className="text-xs sm:text-sm text-muted mb-3 font-bodyFont cursor-pointer hover:text-primary transition-colors"
               >
                 {truncate(task.description, 100)}
               </p>
@@ -149,13 +149,13 @@ export default function TaskCard({ task }: TaskCardProps) {
           </>
         )}
 
-        <div className="flex flex-wrap gap-2 mb-4">
+        <div className="flex flex-wrap gap-1 sm:gap-2 mb-4">
           <select
             value={task.status}
             onChange={(e) => handleStatusChange(e.target.value as TaskStatus)}
             disabled={loading}
             title="Task status"
-            className={`text-xs px-3 py-1 rounded-lg font-bodyFont font-medium transition-colors disabled:opacity-50 cursor-pointer ${
+            className={`text-xs px-2 sm:px-3 py-1 rounded-lg font-bodyFont font-medium transition-colors disabled:opacity-50 cursor-pointer ${
               statusColors[task.status]
             }`}
           >
@@ -173,7 +173,7 @@ export default function TaskCard({ task }: TaskCardProps) {
             }
             disabled={loading}
             title="Task priority"
-            className={`text-xs px-3 py-1 rounded-lg font-bodyFont font-medium transition-colors disabled:opacity-50 cursor-pointer ${
+            className={`text-xs px-2 sm:px-3 py-1 rounded-lg font-bodyFont font-medium transition-colors disabled:opacity-50 cursor-pointer ${
               priorityColors[task.priority]
             }`}
           >

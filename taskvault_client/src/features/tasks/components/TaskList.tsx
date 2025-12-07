@@ -9,9 +9,9 @@ interface TaskListProps {
 export default function TaskList({ tasks, onRefresh }: TaskListProps) {
   if (tasks.length === 0) {
     return (
-      <div className="text-center py-12 bg-surface rounded-lg">
-        <p className="text-muted text-lg">No tasks found</p>
-        <p className="text-muted text-sm mt-2">
+      <div className="text-center py-8 sm:py-12 bg-surface rounded-lg">
+        <p className="text-muted text-base sm:text-lg">No tasks found</p>
+        <p className="text-muted text-xs sm:text-sm mt-2">
           Create your first task to get started
         </p>
       </div>
@@ -19,7 +19,7 @@ export default function TaskList({ tasks, onRefresh }: TaskListProps) {
   }
 
   return (
-    <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+    <div className="grid gap-3 sm:gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
       {tasks.map((task) => (
         <TaskCard key={task.id} task={task} onUpdate={onRefresh} />
       ))}

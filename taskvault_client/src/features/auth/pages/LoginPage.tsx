@@ -58,6 +58,13 @@ export default function LoginPage() {
         </div>
 
         <div className="px-8 py-7">
+          <div className="mb-6">
+            <Alert
+              type="info"
+              message="Backend is on Render's free tier. First request may take 30-60 seconds to activate."
+            />
+          </div>
+
           {error && (
             <div className="mb-6">
               <Alert
