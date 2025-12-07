@@ -2,6 +2,7 @@ import "reflect-metadata";
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
+import http from "http";
 
 import { envConfig } from "./config/env";
 import AppDataSource from "./config/supabase";
@@ -9,8 +10,10 @@ import { errorHandler } from "./middleware/errorHandler";
 import { limiter } from "./middleware/rateLimiter";
 import authRoutes from "./routes/auth.routes";
 import taskRoutes from "./routes/task.routes";
+import { initializeSocket } from "./socket/socket";
 
 export const app = express();
+export const httpServer = http.createServer(app);
 
 app.set("trust proxy", 1);
 
@@ -48,7 +51,9 @@ export const startServer = async () => {
     }
 
     if (envConfig.NODE_ENV !== "test") {
-      app.listen(envConfig.PORT, () => {
+      initializeSocket(httpServer, envConfig.REACT_URL);
+
+      httpServer.listen(envConfig.PORT, () => {
         console.log(`Server running on port ${envConfig.PORT}`);
       });
     }
@@ -61,3 +66,4 @@ export const startServer = async () => {
 if (envConfig.NODE_ENV !== "test") {
   startServer();
 }
+

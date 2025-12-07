@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import AppDataSource from "@/config/supabase";
 import { Task } from "@/entities/task.entity";
 import { ITaskQuery } from "@/types";
+import { emitToUser } from "@/socket/socket";
 
 export const createTask = async (req: Request, res: Response) => {
   try {
@@ -15,6 +16,8 @@ export const createTask = async (req: Request, res: Response) => {
     });
 
     await taskRepo.save(task);
+
+    emitToUser(userId, 'task:created', task);
 
     return res.status(201).json({
       success: true,
@@ -130,6 +133,8 @@ export const updateTask = async (req: Request, res: Response) => {
     taskRepo.merge(task, req.body);
     await taskRepo.save(task);
 
+    emitToUser(userId, 'task:updated', task);
+
     return res.status(200).json({
       success: true,
       task,
@@ -161,6 +166,8 @@ export const deleteTask = async (req: Request, res: Response) => {
     }
 
     await taskRepo.remove(task);
+
+    emitToUser(userId, 'task:deleted', { id });
 
     return res.status(200).json({
       success: true,
