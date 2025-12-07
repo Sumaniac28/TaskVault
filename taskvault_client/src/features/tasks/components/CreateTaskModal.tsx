@@ -24,6 +24,7 @@ export default function CreateTaskModal({
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<CreateTaskPayload>();
 
   const onSubmit = async (data: CreateTaskPayload) => {
@@ -32,6 +33,7 @@ export default function CreateTaskModal({
       setError("");
       const task = await tasksApi.createTask(data);
       dispatch(addTask(task));
+      reset();
       onSuccess();
       onClose();
     } catch (err: any) {

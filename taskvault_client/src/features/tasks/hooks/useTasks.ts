@@ -20,9 +20,10 @@ export const useTasks = (options: UseTasksOptions = {}) => {
 
   const CACHE_DURATION = 30000;
 
-  const loadTasks = useCallback(async () => {
+  const loadTasks = useCallback(async (skipCache = false) => {
     const now = Date.now();
     if (
+      !skipCache &&
       cacheRef.current.tasks &&
       now - cacheRef.current.timestamp < CACHE_DURATION
     ) {

@@ -9,10 +9,18 @@ interface AuthState {
   loading: boolean;
 }
 
+const getInitialToken = (): string | null => {
+  try {
+    return localStorage.getItem("token");
+  } catch {
+    return null;
+  }
+};
+
 const initialState: AuthState = {
   user: null,
-  token: localStorage.getItem("token"),
-  isAuthenticated: !!localStorage.getItem("token"),
+  token: getInitialToken(),
+  isAuthenticated: !!getInitialToken(),
   loading: false,
 };
 
@@ -27,7 +35,9 @@ const authSlice = createSlice({
       state.user = action.payload.user;
       state.token = action.payload.token;
       state.isAuthenticated = true;
-      localStorage.setItem("token", action.payload.token);
+      try {
+        localStorage.setItem("token", action.payload.token);
+      } catch {}
     },
     setUser: (state, action: PayloadAction<User>) => {
       state.user = action.payload;
@@ -37,7 +47,9 @@ const authSlice = createSlice({
       state.user = null;
       state.token = null;
       state.isAuthenticated = false;
-      localStorage.removeItem("token");
+      try {
+        localStorage.removeItem("token");
+      } catch {}
       disconnectSocket();
     },
     setLoading: (state, action: PayloadAction<boolean>) => {

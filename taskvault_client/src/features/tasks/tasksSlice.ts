@@ -23,7 +23,10 @@ const tasksSlice = createSlice({
       state.tasks = action.payload;
     },
     addTask: (state, action: PayloadAction<Task>) => {
-      state.tasks.unshift(action.payload);
+      const exists = state.tasks.some((task) => task.id === action.payload.id);
+      if (!exists) {
+        state.tasks.unshift(action.payload);
+      }
     },
     updateTask: (state, action: PayloadAction<Task>) => {
       const index = state.tasks.findIndex(

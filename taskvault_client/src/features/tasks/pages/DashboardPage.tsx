@@ -100,7 +100,7 @@ export default function DashboardPage() {
       {showCreateModal && (
         <CreateTaskModal
           onClose={() => setShowCreateModal(false)}
-          onSuccess={loadTasks}
+          onSuccess={() => loadTasks(true)}
         />
       )}
     </div>

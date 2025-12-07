@@ -1,11 +1,19 @@
 export const setToken = (token: string): void => {
-  localStorage.setItem("token", token);
+  try {
+    localStorage.setItem("token", token);
+  } catch {}
 };
 
 export const getToken = (): string | null => {
-  return localStorage.getItem("token");
+  try {
+    return localStorage.getItem("token");
+  } catch {
+    return null;
+  }
 };
 
 export const removeToken = (): void => {
-  localStorage.removeItem("token");
+  try {
+    localStorage.removeItem("token");
+  } catch {}
 };

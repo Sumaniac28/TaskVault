@@ -11,10 +11,12 @@ export const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
+    try {
+      const token = localStorage.getItem("token");
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+    } catch {}
     return config;
   },
   (error) => {
@@ -25,8 +27,10 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
-      localStorage.removeItem("token");
+    if (error.response?.status === 401 && localStorage.getItem("token")) {
+      try {
+        localStorage.removeItem("token");
+      } catch {}
       window.location.href = "/login";
     }
     return Promise.reject(error);
